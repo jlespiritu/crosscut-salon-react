@@ -1,5 +1,6 @@
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
+import services from '../data/services';
 
 function BookingPage() {
   return (
@@ -22,10 +23,11 @@ function BookingPage() {
         <div className="flex flex-col gap-2">
           <label className="text-sm font-semibold text-gray-500 ml-1">Select Service</label>
           <select className="bg-white border border-gray-200 p-3 rounded-xl text-slate-800 focus:border-[#C5A059] outline-none transition-all">
-            <option>Precision Haircut</option>
-            <option>Luxury Hair Color</option>
-            <option>Royal Shave & Trim</option>
-            <option>Full Grooming Package</option>
+            {services.map((service) => (
+              <option key={service.id} value={service.title}>
+                {service.title} — {service.price}
+              </option>
+            ))}
           </select>
         </div>
 

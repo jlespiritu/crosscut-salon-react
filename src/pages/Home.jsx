@@ -1,6 +1,7 @@
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import { Link } from 'react-router-dom';
+import Staff from '../components/sections/Staff';
 
 function Home() {
   return (
@@ -37,6 +38,7 @@ function Home() {
       </section>
 
       {/* SIGNATURE SERVICES - Soft Grid */}
+
       <section className="py-24 px-6 max-w-7xl mx-auto w-full">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-4">Signature Treatments</h2>
@@ -45,25 +47,25 @@ function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <Card 
-            title="The Royal Glow" 
-            description="Our signature facial and hair treatment for ultimate radiance." 
-            price="₱2,500" 
-            image="https://images.unsplash.com/photo-1560750588-777936275467?w=600"
+            title="Collagen" 
+            description="Intensive conditioning treatment for damaged, dry hair." 
+            price="₱1,199 - ₱1,499" 
           />
           <Card 
-            title="Silk & Shine" 
-            description="Deep conditioning and luxury styling for effortless hair." 
-            price="₱1,200" 
-            image="https://images.unsplash.com/photo-1562322140-7575B1625aae?w=600"
+            title="Cystein" 
+            description="Restorative treatment that rebuilds hair structure from within." 
+            price="₱2,500 - ₱5,000" 
           />
           <Card 
-            title="Elegance Cut" 
-            description="A sophisticated cut designed to frame your unique beauty." 
-            price="₱800" 
-            image="https://images.unsplash.com/photo-1516975080664-ed27a484887d?w=600"
+            title="Protein Straight" 
+            description="Protein-infused straightening for smooth, healthy-looking hair." 
+            price="₱3,500 - ₱7,000" 
           />
         </div>
       </section>
+
+      {/* STAFF SECTION - Meet the Team */}
+      <Staff />
 
       {/* EXPERIENCE SECTION - Soft & Airy */}
       <section className="bg-white py-24 px-6">
