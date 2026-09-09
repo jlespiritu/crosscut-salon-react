@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 
 function Header() {
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -10,6 +12,8 @@ function Header() {
     { path: '/booking', label: 'Booking' },
     { path: '/contact', label: 'Contact' },
   ];
+
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <>
@@ -21,7 +25,7 @@ function Header() {
             <div className="w-12 h-12 rounded-full border-2 border-brand-gold overflow-hidden shadow-sm">
               <img src={logo} alt="CrossCut Salon logo" className="w-full h-full object-cover" />
             </div>
-            <span className="hidden md:block text-xl font-bold tracking-tighter text-slate-800 uppercase">
+            <span className="text-xl font-bold tracking-tighter text-slate-800 uppercase">
               CrossCut <span className="text-brand-gold">Salon</span>
             </span>
           </Link>
@@ -52,8 +56,65 @@ function Header() {
           >
             Book Now
           </Link>
+
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={isMenuOpen}
+            className="md:hidden text-slate-800 p-2"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
         </div>
       </header>
+
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-[60] bg-[#FDFBFB] flex flex-col items-center justify-center gap-10 md:hidden">
+          <button
+            type="button"
+            onClick={closeMenu}
+            aria-label="Close menu"
+            className="absolute top-6 right-6 text-slate-800 p-2"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path;
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={closeMenu}
+                aria-current={isActive ? 'page' : undefined}
+                className={
+                  isActive
+                    ? 'text-3xl font-serif italic text-brand-gold'
+                    : 'text-3xl font-serif italic text-slate-800 hover:text-brand-gold transition-colors'
+                }
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+
+          <Link
+            to="/booking"
+            onClick={closeMenu}
+            className="inline-flex items-center justify-center bg-[#C5A059] text-white hover:bg-[#B38F4D] shadow-lg shadow-[#C5A059]/30 px-10 py-4 rounded-full font-medium text-sm uppercase tracking-widest transition-all duration-500 mt-6"
+          >
+            Book Now
+          </Link>
+        </div>
+      )}
     </>
   );
 }
