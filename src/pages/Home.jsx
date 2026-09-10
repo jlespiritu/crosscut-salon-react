@@ -9,10 +9,14 @@ function Home() {
       {/* HERO SECTION - Airy & Elegant */}
       <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1560066974-5ed777a2f87d?w=1600" 
-            alt="Luxury Salon" 
-            className="w-full h-full object-cover opacity-60" 
+          <img
+            src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=1600"
+            alt="Luxury Salon"
+            loading="eager"
+            fetchPriority="high"
+            width="1600"
+            height="900"
+            className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-[#FDFBFB]"></div>
         </div>
@@ -38,7 +42,6 @@ function Home() {
       </section>
 
       {/* SIGNATURE SERVICES - Soft Grid */}
-
       <section className="py-24 px-6 max-w-7xl mx-auto w-full">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-4">Signature Treatments</h2>
@@ -46,20 +49,20 @@ function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <Card 
-            title="Collagen" 
-            description="Intensive conditioning treatment for damaged, dry hair." 
-            price="₱1,199 - ₱1,499" 
+          <Card
+            title="Collagen"
+            description="Intensive conditioning treatment for damaged, dry hair."
+            price="₱1,199 - ₱1,499"
           />
-          <Card 
-            title="Cystein" 
-            description="Restorative treatment that rebuilds hair structure from within." 
-            price="₱2,500 - ₱5,000" 
+          <Card
+            title="Cystein"
+            description="Restorative treatment that rebuilds hair structure from within."
+            price="₱2,500 - ₱5,000"
           />
-          <Card 
-            title="Protein Straight" 
-            description="Protein-infused straightening for smooth, healthy-looking hair." 
-            price="₱3,500 - ₱7,000" 
+          <Card
+            title="Protein Straight"
+            description="Protein-infused straightening for smooth, healthy-looking hair."
+            price="₱3,500 - ₱7,000"
           />
         </div>
       </section>
@@ -71,9 +74,12 @@ function Home() {
       <section className="bg-white py-24 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
-            <img 
-              src="https://images.unsplash.com/photo-1487412720507-b99502d4bed7?w=800" 
-              alt="Pampering" 
+            <img
+              src="https://media.istockphoto.com/id/1444907346/photo/beautiful-girl-with-smooth-silky-dark-brown-flying-hair.jpg?s=1024x1024&w=is&k=20&c=vTQeAFgUwxWT2r7h5lirc2XoS_mh41dx3fIAmltF0zw="
+              alt="Hair care and styling"
+              loading="lazy"
+              width="800"
+              height="800"
               className="rounded-full w-full aspect-square object-cover shadow-2xl border-8 border-[#FDF2F2]"
             />
             <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#C5A059]/20 rounded-full blur-3xl"></div>
