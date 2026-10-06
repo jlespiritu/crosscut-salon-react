@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.jpg';
 
 function Header() {
   const location = useLocation();
@@ -9,6 +9,7 @@ function Header() {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
+    { path: '/staff', label: 'Staff' },
     { path: '/booking', label: 'Booking' },
     { path: '/contact', label: 'Contact' },
   ];
