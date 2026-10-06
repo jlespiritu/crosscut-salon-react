@@ -6,7 +6,7 @@ import services from '../data/services';
 function ServicesPage() {
   // Group services by category
   const groupedServices = services.reduce((groups, service) => {
-    const category = service.category;
+    const category = service.category || 'Services';
     if (!groups[category]) {
       groups[category] = [];
     }
@@ -35,11 +35,11 @@ function ServicesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {groupedServices[categoryName].map((service) => (
               <div key={service.id} className="flex flex-col gap-6">
-                <Card 
-                  title={service.title} 
-                  description={service.description} 
-                  price={service.price} 
-                  image={service.image} 
+                <Card
+                  title={service.title}
+                  description={service.description}
+                  price={service.price}
+                  image={service.image}
                 />
                 <Link to="/booking">
                   <Button variant="primary" className="w-full">Book This Service</Button>
@@ -53,7 +53,7 @@ function ServicesPage() {
       <div className="mt-20 bg-white rounded-3xl p-8 md:p-12 text-center border border-gray-100 shadow-xl">
         <h2 className="text-3xl font-serif font-bold mb-4 text-slate-900">Not sure what to choose?</h2>
         <p className="mb-8 text-gray-500 text-lg max-w-xl mx-auto">
-          Our expert stylists can provide a free consultation to help you find 
+          Our expert stylists can provide a free consultation to help you find
           the perfect style for your face shape and hair type.
         </p>
         <Link to="/contact">
