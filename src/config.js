@@ -4,8 +4,8 @@
 // Huwag maglagay dito ng anumang password o secret key.
 
 // Ang "Web app URL" ng Apps Script. Nagtatapos sa /exec
-export const BOOKING_API_URL = 'https://script.google.com/macros/s/AKfycbxfz2C52eACeSZUJ3Mf_ISVrrCkvMMYCspBgPOgX399rGET2mjagjSUQUdP4arSGf2SSQ/exec';
-
+export const API_BASE_URL = 'https://crosscut-salon-backend.onrender.com';
+export const API_KEY = import.meta.env.VITE_API_KEY || '';
 // Ipapakita kapag pumalya ang pagpapadala ng booking. Iwanang '' kung wala pa.
 // Halimbawa: '0917 123 4567'
 export const CONTACT_PHONE = '09560641763';

@@ -4,7 +4,8 @@ import Input from '../components/ui/Input';
 import services from '../data/services';
 import * as staffModule from '../data/staff';
 import {
-  BOOKING_API_URL,
+  API_BASE_URL,
+  API_KEY,
   CONTACT_PHONE,
   OPEN_HOUR,
   CLOSE_HOUR,
@@ -15,7 +16,8 @@ import {
 // Kahit default export o named export ang staff.js, hindi magbabagsak ng page
 const staff = staffModule.default || staffModule.staff || [];
 
-const isConfigured = /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(BOOKING_API_URL);
+// Naka-set ba ang backend URL at API key?
+const isConfigured = Boolean(API_BASE_URL && API_KEY);
 
 const pad2 = (n) => String(n).padStart(2, '0');
 
@@ -131,10 +133,14 @@ function BookingPage() {
     let cancelled = false;
     const controller = new AbortController();
     setSlotInfo({ status: 'loading', counts: {}, max: Infinity });
-    fetch(`${BOOKING_API_URL}?action=slots&date=${encodeURIComponent(formData.date)}`, {
+    fetch(`${API_BASE_URL}/bookings/slots?date=${encodeURIComponent(formData.date)}`, {
+      headers: { 'x-api-key': API_KEY },
       signal: controller.signal,
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) throw new Error('slots-failed');
+        return response.json();
+      })
       .then((data) => {
         if (cancelled) return;
         if (data && data.ok) {
@@ -192,14 +198,17 @@ function BookingPage() {
     setSubmitError('');
 
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 30000);
+    // 60 segundo dahil minsan natutulog ang Render free tier at matagal gumising
+    const timer = setTimeout(() => controller.abort(), 60000);
     try {
       if (!isConfigured) throw new Error('not-configured');
 
-      // "text/plain" para hindi na kailangan ng preflight ang Apps Script
-      const response = await fetch(BOOKING_API_URL, {
+      const response = await fetch(`${API_BASE_URL}/bookings`, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': API_KEY,
+        },
         body: JSON.stringify({
           name: formData.name.trim(),
           phone: formData.phone.trim(),
@@ -214,7 +223,9 @@ function BookingPage() {
         }),
         signal: controller.signal,
       });
-      const result = await response.json();
+
+      // Kahit error ang status, subukan pa ring basahin ang JSON para sa error code
+      const result = await response.json().catch(() => null);
 
       if (result && result.ok) {
         setBookingId(result.id || '');
